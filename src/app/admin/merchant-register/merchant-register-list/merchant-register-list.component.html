@@ -1,0 +1,64 @@
+<app-sidebar-admin></app-sidebar-admin>
+<app-navbar-admin></app-navbar-admin>
+<div class="content-wrapper">
+  <router-outlet></router-outlet>
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Danh sách đăng ký cửa hàng</h1>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+              <table id="merchant-list" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Email</th>
+                  <th>Tên cửa hàng</th>
+                  <th>Địa chỉ</th>
+                  <th>Mô tả</th>
+                  <th>Số điện thoại</th>
+                  <th>Giờ mở cửa</th>
+                  <th>Giờ đóng cửa</th>
+                  <th colspan="2">Chức năng</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let merchantRegister of merchantRegisters; index as i">
+                  <td>{{i + 1}}</td>
+                  <td>{{merchantRegister.user.email}}</td>
+                  <td>{{merchantRegister.name}}</td>
+                  <td>{{merchantRegister.address}}</td>
+                  <td>{{merchantRegister.description}}</td>
+                  <td>{{merchantRegister.phone}}</td>
+                  <td>{{merchantRegister.openTime}}</td>
+                  <td>{{merchantRegister.closeTime}}</td>
+                  <td><button (click)="submitAcceptRegisterRequest(merchantRegister)" class="btn btn-success">Duyệt</button></td>
+                  <td><button (click)="submitRefuseRegisterRequest(merchantRegister)" class="btn btn-danger">Từ chối</button></td>
+
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+</div>

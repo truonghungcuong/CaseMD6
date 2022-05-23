@@ -1,0 +1,50 @@
+<app-navbar-customer></app-navbar-customer>
+<app-my-merchant-banner [merchant]="merchant"></app-my-merchant-banner>
+<app-second-navbar></app-second-navbar>
+<div class="bg-white p-4 shadow-lg">
+  <div class="osahan-track-order-detail po">
+    <div class="container">
+      <h4>Thông tin đơn hàng</h4>
+      <p class="mb-2 text-black">Trạng thái đơn hàng <span
+        class="float-right text-primary order-status">{{orderDto.status < 0 ? 'Đã hủy' :
+        orderDto.status > 0 ? 'Đã xác nhận' :
+          'Đang chờ xác nhận'}}</span></p>
+      <p class="mb-2 text-black">Ngày đặt hàng <span
+        class="float-right text-secondary">{{orderDto.createDate | date: 'dd/MM/yyyy hh:mm'}}</span></p>
+      <p class="mb-2 text-black">Tên người nhận <span
+        class="float-right text-secondary">{{orderDto.deliveryInfo?.name}}</span></p>
+      <p class="mb-2 text-black">Địa chỉ giao hàng <span
+        class="float-right text-secondary">{{orderDto.deliveryInfo?.address}}</span></p>
+      <p class="mb-2 text-black">Số điện thoại <span
+        class="float-right text-secondary">{{orderDto.deliveryInfo?.phone}}</span></p>
+      <hr>
+      <h4 class="mt-0 mb-3">Chi tiết đơn hàng</h4>
+      <p class="mb-2" *ngFor="let cartDetail of orderDto.cart.cartDetails">
+        <i class="icofont-ui-press text-danger food-item">
+        </i> {{cartDetail.dish.name}} x {{cartDetail.quantity}} <span
+        class="float-right text-secondary">{{cartDetail.dish.price * cartDetail.quantity}}</span>
+      </p>
+      <hr>
+      <p class="mb-2 text-black">Tổng tiền hàng <span
+        class="float-right text-secondary">{{orderDto.cart.foodTotal}}</span></p>
+      <p class="mb-2 text-black">Tổng giảm giá <span
+        class="float-right text-secondary">{{orderDto.cart.discountAmount}}</span></p>
+      <p class="mb-2 text-black">Phí dịch vụ <span
+        class="float-right text-secondary">{{orderDto.cart.serviceFee}}</span></p>
+      <p class="mb-2 text-black">Phí giao hàng <span
+        class="float-right text-secondary">{{orderDto.cart.shippingFee}}</span></p>
+      <p class="mb-0 font-weight-bold text-black">Tổng thanh toán <span
+        class="float-right text-secondary">{{orderDto.cart.totalFee}}</span></p>
+      <!-- <p class="mb-0 text-info"><small>Paid via Credit/Debit card
+              <span class="float-right text-danger">$620 OFF</span></small>
+      </p> -->
+    </div>
+  </div>
+</div>
+<div class="container">
+  <button type="button" class="btn btn-success m-3" *ngIf="orderDto.status===0"
+          (click)="submitAcceptOrderByMerchant()"
+  >Xác nhận đơn hàng
+  </button>
+  <button type="button" class="btn btn-secondary m-3" routerLink="/merchant/orders">Quay lại</button>
+</div>

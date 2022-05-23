@@ -1,0 +1,60 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Danh sách sản phẩm</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="example2" class="table table-bordered table-hover">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>Tên món ăn</th>
+                <th>Giá</th>
+                <th>Loại món</th>
+                <th>Đã bán</th>
+                <th>Mô tả</th>
+                <th>Ảnh món ăn</th>
+                <th colspan="2">Hành động</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let dish of dishes; index as i">
+                <td>{{i + 1}}</td>
+                <td>{{dish.name}}</td>
+                <td>{{dish.price}}</td>
+                <td>
+                          <span *ngFor="let category of dish.categories; index as i">
+                            {{category.name}} <span *ngIf="i < dish.categories.length - 1">, </span>
+                          </span>
+                </td>
+                <td>{{dish.sold}}</td>
+                <td>{{dish.description}}</td>
+                <td><img src="http://localhost:8080/image/{{dish.image}}" style="height:120px" alt="Ảnh món ăn"></td>
+                <td class="text-center">
+                  <a class="btn btn-warning" routerLink="/edit/{{dish.id}}">
+                    <i class="fa fa-edit"></i>
+                  </a>
+                </td>
+                <td class="text-center">
+                  <a class="btn btn-danger" routerLink="['/dishes/delete',dish.id]">
+                    <i class="fa fa-trash"></i>
+                  </a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</section>

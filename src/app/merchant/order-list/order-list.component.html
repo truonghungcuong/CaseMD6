@@ -1,0 +1,72 @@
+<app-navbar-customer></app-navbar-customer>
+<app-my-merchant-banner [merchant]="merchant"></app-my-merchant-banner>
+<app-second-navbar></app-second-navbar>
+
+<section class="content">
+  <div class="mt-3">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header px-4">
+            <h3 class="card-title">Quản lý đơn hàng</h3>
+<!--                        <button class="btn btn-info float-right ml-2">-->
+<!--                          <a class="text-light" routerLink="/merchant/dish/create">Phiếu mua hàng</a>-->
+<!--                        </button>-->
+                        <button class="btn btn-info float-right ml-2">
+                          <a class="text-light" routerLink="/merchant/{{merchant.id}}/orders/users">Khách hàng</a>
+                        </button>
+                        <button class="btn btn-info float-right ml-2">
+                          <a class="text-light" routerLink="/merchant/{{merchant.id}}/orders/dishes">Món ăn</a>
+                        </button>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="example2" class="table table-bordered table-hover">
+              <thead>
+              <tr>
+                <th>STT</th>
+                <th>Mã đơn hàng</th>
+                <th>Tên khách hàng</th>
+                <th>Giá</th>
+                <th>Địa chỉ</th>
+                <th>Số điện thoại</th>
+                <th>Thời gian tạo</th>
+                <th>Trạng thái</th>
+                <th colspan="2"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let order of orders; index as i">
+                <td>{{i + 1}}</td>
+                <td>#{{order.id}}</td>
+                <td>{{order.full_Name}}</td>
+                <td>{{order.orderPrice | number}}</td>
+                <td>{{order.address}}</td>
+                <td>{{order.phone}}</td>
+                <td>{{order.create_Date | date: 'dd/MM/yyyy hh:mm' }}</td>
+                <td>{{order.status < 0 ? 'Đã hủy' :
+                  order.status > 0 ? 'Đã xác nhận' :
+                    'Đang chờ xác nhận'}}</td>
+                <td><button routerLink="/merchant/orders/view/{{order.id}}" class="btn btn-info">Xem chi tiết</button></td>
+                <td>
+                  <button *ngIf="order.status == 0" (click)="submitAcceptOrderByMerchant(order.id,order)"
+                          class="btn btn-success">Xác nhận đơn hàng</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<hr>
+<app-footer></app-footer>
+

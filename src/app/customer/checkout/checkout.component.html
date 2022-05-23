@@ -1,0 +1,227 @@
+<app-navbar-customer id="app-navbar-customer"></app-navbar-customer>
+
+<section class="offer-dedicated-body mt-4 mb-4 pt-2 pb-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="offer-dedicated-body-left" id="checkout-info-div">
+          <div class="bg-white rounded shadow-sm p-4">
+            <h4 class="mb-1">Thanh toán đơn hàng</h4>
+          </div>
+          <div class="pt-2"></div>
+
+          <div class="bg-white rounded shadow-sm p-4 mb-4">
+            <h4 class="mb-3">Chọn địa chỉ giao hàng</h4>
+            <!-- <h6 class="mb-3 text-black-50">Multiple addresses in this location</h6> -->
+            <div class="d-flex flex-wrap">
+              <div class="col-md-6" *ngIf="!defaultDeliveryInfo">
+                <div class="bg-white card addresses-item mb-4 border border-success">
+                  <div class="gold-members p-4">
+                    <h6 class="mb-1 text-black"> Thêm địa chỉ giao hàng để tiếp tục</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6" *ngIf="defaultDeliveryInfo">
+                <div class="bg-white card addresses-item mb-4 border border-success">
+                  <div class="gold-members p-4">
+                    <div class="media">
+                      <div class="mr-3">
+                        <i class="icofont-location-pin icofont-3x"></i>
+                        <h6 class="text-green mt-2">Giao tới</h6>
+                      </div>
+                      <div class="media-body">
+                        <h6 class="mb-1 text-black">{{defaultDeliveryInfo.name}}</h6>
+                        <p><i class="icofont-phone-circle icofont-1x"></i> <span> {{defaultDeliveryInfo.phone}}</span>
+                        </p>
+                        <p class="text-black">{{defaultDeliveryInfo.address}}
+                        </p>
+                        <p class="mb-0 text-black font-weight-bold">
+                        <p class="mb-0 text-black font-weight-bold"><button class="btn btn-sm btn-secondary mr-2"
+                                                                            data-toggle="modal" data-target="#edit-delivery-modal"
+                                                                            (click)="putToModalEditDeliveryInfo(defaultDeliveryInfo)">
+                          <i class="icofont-ui-edit"></i> Sửa</button>
+                          <span>30MIN</span>
+
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6" *ngFor="let deliveryInfo of otherDeliveryInfo">
+                <div class="bg-white card addresses-item">
+                  <div class="gold-members p-4">
+                    <div class="media">
+                      <div class="mr-3"><i class="icofont-location-pin icofont-2x"></i></div>
+                      <div class="media-body">
+                        <h6 class="mb-1 text-black">{{deliveryInfo.name}}</h6>
+                        <p><i class="icofont-phone-circle icofont-1x"></i> <span> {{deliveryInfo.phone}}</span></p>
+                        <p>{{deliveryInfo.address}}</p>
+                        <p class="mb-0 text-black font-weight-bold">
+                          <button class="btn btn-sm btn-secondary mr-2" (click)="chooseDeliveryInfo(deliveryInfo.user.id,deliveryInfo.id)">
+                            Chọn địa chỉ
+                          </button>
+                        <p class="mb-0 text-black font-weight-bold"><button class="btn btn-sm btn-secondary mr-2"
+                                                                            data-toggle="modal" data-target="#edit-delivery-modal"
+                                                                            (click)="putToModalEditDeliveryInfo(deliveryInfo)"><i
+                          class="icofont-ui-edit"></i> Sửa</button>
+                          <span>45MIN</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="bg-white card addresses-item">
+                  <div class="gold-members p-4">
+                    <div class="media">
+                      <div class="mr-3"><i class="icofont-location-pin icofont-2x"></i></div>
+                      <div class="media-body">
+                        <h6 class="mb-1 text-secondary">Other</h6>
+                        <p>Địa chỉ giao hàng mới</p>
+                        <p class="mb-0 text-black font-weight-bold"><a data-toggle="modal"
+                                                                       data-target="#create-delivery-modal"
+                                                                       class="btn btn-sm btn-primary mr-2" (click)="clearForm()">
+                          Thêm địa chỉ
+                          giao hàng mới</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pt-2"></div>
+          <div class="bg-white rounded shadow-sm p-4 osahan-payment">
+            <h4 class="mb-1">Phương thức thanh toán</h4>
+            <h6 class="mb-3 text-black-50">Thanh toán khi nhận hàng</h6>
+            <div class="row">
+              <div class="col-sm-4 pr-0">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                     aria-orientation="vertical">
+                  <a class="nav-link active" id="v-pills-cash-tab" data-toggle="pill"
+                     href="#v-pills-cash" role="tab" aria-controls="v-pills-cash"
+                     aria-selected="false"><i class="icofont-money"></i> COD</a>
+                  <a class="nav-link" id="v-pills-home-tab" data-toggle="pill"
+                     href="#v-pills-home" role="tab" aria-controls="v-pills-home"
+                     aria-selected="true"><i class="icofont-credit-card"></i> Credit/Debit
+                    Cards</a>
+                  <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill"
+                     href="#v-pills-settings" role="tab" aria-controls="v-pills-settings"
+                     aria-selected="false"><i class="icofont-bank-alt"></i> Netbanking</a>
+                </div>
+              </div>
+              <div class="col-sm-8 pl-0">
+                <div class="tab-content h-100" id="v-pills-tabContent">
+                  <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                       aria-labelledby="v-pills-home-tab">
+                    <form>
+                      <div class="form-row">
+                        <div class="form-group col-md-12">
+                          <label>Ghi chú cho shipper
+                          </label>
+                          <textarea rows='5' class="form-control"
+                                    placeholder="Shipper nên lưu ý ..."></textarea>
+                        </div>
+                        <div class="form-group col-md-12">
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input"
+                                   id="customCheck1">
+                            <label class="custom-control-label"
+                                   for="customCheck1">Securely save this card for a faster
+                              checkout next time.</label>
+                          </div>
+                        </div>
+                        <div class="form-group col-md-12 mb-0">
+                          <button class="btn btn-success btn-block btn-lg"
+                                  (click)="submitOrder()">
+                            Thanh toán {{cart.totalFee | number}}
+                            <i class="icofont-long-arrow-right"></i></button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <app-cart-table-checkout [merchantId]="merchantId" [showCheckoutButton]="false"
+                                 [showRestaurantNote]="true"
+                                 (changeCart)="changeCartFromChildComponent($event)"
+        ></app-cart-table-checkout>
+
+      </div>
+    </div>
+  </div>
+</section>
+<div class="modal fade" id="edit-delivery-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form [formGroup]="deliveryInfoForm" (ngSubmit)="submitFormEditDeliveryInfo()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cập nhật địa chỉ giao hàng mới</h5>
+          <span type="button" class="btn-close" data-dismiss="modal" aria-label="Close">X</span>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="name" class="form-label">Họ và tên</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+            <!--            <p class="validate" [hidden]="fullName.valid || !fullName.touched">Nhập Họ và tên</p>-->
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Số điện thoại</label>
+            <input type="text" class="form-control" id="phone" formControlName="phone">
+            <!--            <p class="validate" [hidden]="phone.valid || !phone.touched">Định dạng số điện thoại không đúng</p>-->
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Địa chỉ</label>
+            <input type="text" class="form-control" id="address" formControlName="address">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+          <button type="submit" class="btn btn-info">Cập nhật</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="create-delivery-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form [formGroup]="deliveryInfoForm" (ngSubmit)="submitFormCreateDeliveryInfo()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModal">Thêm địa chỉ giao hàng mới</h5>
+          <span type="button" class="btn-close" data-dismiss="modal" aria-label="Close">X</span>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="name" class="form-label">Họ và tên</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+            <!--            <p class="validate" [hidden]="fullName.valid || !fullName.touched">Nhập Họ và tên</p>-->
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Số điện thoại</label>
+            <input type="text" class="form-control" id="phone" formControlName="phone">
+            <!--            <p class="validate" [hidden]="phone.valid || !phone.touched">Định dạng số điện thoại không đúng</p>-->
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Địa chỉ</label>
+            <input type="text" class="form-control" id="address" formControlName="address">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+          <button type="submit" class="btn btn-info">Cập nhật</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,39 @@
+<app-navbar-customer id="app-navbar-customer" [refreshNum]="countChanges"></app-navbar-customer>
+<app-merchant-banner [merchant]="merchant" id="app-merchant-banner"></app-merchant-banner>
+
+<div class="mt-4 container d-flex">
+  <div class="row mb-3 p-3 rounded shadow-sm justify-content-between full-width" style="background: #fff6b2"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="m-0 col-md-7">
+      <div class="d-flex">
+        <i class="m-0 text-yellow icofont-book-mark icofont-2x"></i>
+        <p class="m-0 text-black merchant-description">&nbsp;{{merchant.description}}</p>
+      </div>
+    </div>
+    <div class="m-0 col-md-4">
+      <app-merchant-vsattp *ngIf="merchant.vsattp && merchant.vsattp?.length > 0" [merchant]="merchant"></app-merchant-vsattp>
+    </div>
+  </div>
+
+</div>
+<section class="section pt-5 pb-5 products-listing">
+  <div class="container">
+    <div class="section-header text-center white-text">
+      <h2>Món ngon của quán</h2>
+      <span class="line"></span>
+    </div>
+
+    <div class="row col-md-12">
+      <div>
+        <!--  <h3 class="mb-2">{{resultTitle}}</h3>-->
+        <div class="row">
+          <div class="col-md-3 col-sm-6 mb-4 pb-2" *ngFor="let dish of dishes">
+            <app-food-card [dish]="dish"></app-food-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-join-us></app-join-us>
+<app-footer></app-footer>

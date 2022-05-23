@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light osahan-nav shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><img alt="logo" src="assets/customer-template/img/logo-topfood.png" style="height: 50px"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/home">Trang chủ <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/merchant" *ngIf="isMerchant">Quản lý cửa hàng <span
+            class="sr-only"></span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login" *ngIf="!loggedIn">Đăng nhập <span class="sr-only"></span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/register" *ngIf="!loggedIn">Đăng ký <span class="sr-only"></span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/users/{{currentUser.id}}" *ngIf="loggedIn">{{currentUser.username}}<span
+            class="sr-only"></span></a>
+        </li>
+
+        <li class="nav-item dropdown dropdown-cart" *ngIf="loggedIn">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-shopping-basket"></i> Giỏ hàng
+            <span class="badge badge-success">{{carts.length}}</span>
+          </a>
+          <div class="dropdown-menu dropdown-cart-top p-0 dropdown-menu-right shadow-sm border-0">
+            <div class="dropdown-cart-top-body border-top p-4" *ngIf="carts.length < 1">
+              <h5>Giỏ hàng trống</h5>
+            </div>
+            <div class="dropdown-cart-top-body border-top p-4"
+                 *ngFor="let cart of carts">
+              <p class="mb-3 ml-1 text-black">
+                <i class="icofont-shopping-cart"></i>
+                {{cart.merchant.name}}
+                <span class="ml-3 float-right text-secondary"><i
+                  class="icofont-location-pin"></i>{{cart.merchant.address}}</span>
+              </p>
+              <p class="mb-2" *ngFor="let cartDetail of cart.cartDetails">
+                <i class="icofont-restaurant text-green food-item"></i>
+                {{cartDetail.dish.name}}
+                <span class="ml-3 float-right text-secondary">
+                    {{cartDetail.quantity}} x {{cartDetail.dish.price | number}} =
+                  {{cartDetail.quantity * cartDetail.dish.price | number}}</span>
+              </p>
+              <p class="mb-4">
+                    <span class="ml-3 float-right text-black">
+                      <button class="ml-3 btn btn-success"
+                              routerLink="/home/checkout/{{cart.merchant.id}}">Thanh toán</button>
+                    </span>
+              </p>
+
+            </div>
+            <!--            <div class="dropdown-cart-top-footer border-top p-4">-->
+            <!--              <p class="mb-0 font-weight-bold text-secondary">Tổng tiền <span-->
+            <!--                class="float-right text-dark">{{total | number}}</span></p>-->
+            <!--              &lt;!&ndash; <small class="text-info">Extra charges may apply</small> &ndash;&gt;-->
+            <!--            </div>-->
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="loggedIn" (click)="logout()">Đăng xuất <span class="sr-only"></span></a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>

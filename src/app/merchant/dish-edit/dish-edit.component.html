@@ -1,0 +1,71 @@
+<app-navbar-customer></app-navbar-customer>
+<app-my-merchant-banner [merchant]="merchant"></app-my-merchant-banner>
+<app-second-navbar></app-second-navbar>
+
+<div class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <div class="content-wrapper">
+      <!--      Bat dau o day -->
+      <div class="container mt-3">
+        <h3>Chỉnh sửa món ăn</h3>
+        <form [formGroup]="dishForm" (ngSubmit)="editMerchantDish()" role="form">
+          <div class="mb-3">
+            <label for="name" class="form-label">Tên món ăn</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+            <div class="validate" [hidden]="nameControl.valid">
+              <div *ngIf="nameControl.errors?.required">Nhập tên món ăn</div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="price" class="form-label">Giá món ăn</label>
+            <input type="number" class="form-control" id="price" formControlName="price">
+            <div class="validate" [hidden]="priceControl.valid">
+              <div *ngIf="priceControl.errors?.required">Nhập giá món ăn</div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label">Mô tả món ăn</label>
+            <input type="text" class="form-control" id="description" formControlName="description">
+            <div class="validate" [hidden]="descriptionControl.valid">
+              <div *ngIf="descriptionControl.errors?.required">Nhập mô tả món ăn</div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Chọn phân loại món ăn</label>
+            <div class="row">
+              <div class="col-3" *ngFor="let category of allCategories; index as i">
+                <input (click)="toggleCategory(category.id)" style="margin-right: 5px" type="checkbox" id='cb-category-{{category.id}}'
+                       value="{{category.name}}"
+                       [checked]="categoryIds.includes(category.id)">
+                <!--               sử dụng property binding : checked (checked là thuộc tính của checkbox -->
+                <!--                tạo ra 1 mảng categoryId chứa id của những category thuộc về 1 dish-->
+                <!--                thuộc tính checked nhận giá trị boolean vậy nên sử dụng hàm includes (trả về boolean)-->
+                <!-- [checked]="categoryId.include(category.id)"-->
+                <label for="cb-category-{{category.id}}" class="form-label">{{category.name}}</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="image" class="form-label">Ảnh món ăn</label>
+            <div>
+              <img src="http://localhost:8080/image/{{dish.image}}" alt="Ảnh món ăn" class="dish-image">
+            </div>
+            <input type="file" class="form-control" id="image" formControlName="image">
+            <div class="validate" [hidden]="imageControl.valid">
+            <div *ngIf="imageControl.errors?.required">Chọn ảnh món ăn</div>
+          </div>
+          </div>
+          <button type="submit" class="btn btn-info">Lưu thay đổi</button>
+          <button type="button" class="btn btn-secondary ml-3" routerLink="/merchant">Quay lại</button>
+        </form>
+      </div>
+      <!--      Ket thuc o day-->
+    </div>
+  </div>
+</div>
+<hr>
+<app-footer></app-footer>

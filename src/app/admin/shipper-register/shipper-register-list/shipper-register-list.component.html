@@ -1,0 +1,59 @@
+<app-sidebar-admin></app-sidebar-admin>
+<app-navbar-admin></app-navbar-admin>
+<div class="content-wrapper">
+  <router-outlet></router-outlet>
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Danh sách đăng ký làm người vận chuyển</h1>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+              <table id="shipper-list" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Email</th>
+                  <th>Tên người vận chuyển</th>
+                  <th>Số điện thoại</th>
+                  <th>Biển số xe</th>
+                  <th>Tên xe</th>
+                  <th colspan="2" >Chức năng</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let shipperRegister of shipperRegisters; index as i" >
+                  <td>{{i + 1}}</td>
+                  <td>{{shipperRegister.user.email}}</td>
+                  <td>{{shipperRegister.name}}</td>
+                  <td>{{shipperRegister.phone}}</td>
+                  <td>{{shipperRegister.licensePlates}}</td>
+                  <td>{{shipperRegister.carName}}</td>
+                  <td><button (click)="submitAcceptShipperRegisterRequest(shipperRegister)"  class="btn btn-success">Duyệt</button></td>
+                  <td><button (click)="submitRefuseShipperRegisterRequest(shipperRegister)" class="btn btn-danger">Từ chối</button></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+</div>

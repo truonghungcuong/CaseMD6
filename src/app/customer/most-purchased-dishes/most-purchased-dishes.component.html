@@ -1,0 +1,15 @@
+<section class="section pt-5 pb-5 bg-white becomemember-section border-bottom">
+  <div class="container">
+    <div class="section-header text-center white-text">
+      <h2>Được mua nhiều nhất</h2>
+      <span class="line"></span>
+    </div>
+    <div class="row">
+
+      <div class="col-md-3 col-sm-6 mb-4" *ngFor="let dish of mostPurchasedDishes">
+        <app-food-card [dish]="dish"></app-food-card>
+      </div>
+
+    </div>
+  </div>
+</section>

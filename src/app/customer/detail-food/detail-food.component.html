@@ -1,0 +1,79 @@
+<app-navbar-customer id="app-navbar-customer" [refreshNum]="countChanges"></app-navbar-customer>
+<app-merchant-banner [merchant]="merchant" id="app-merchant-banner"></app-merchant-banner>
+
+<section class="offer-dedicated-body pt-2 pb-2 mt-4 mb-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="offer-dedicated-body-left">
+<!--          <app-add-to-cart [id]="id" (refreshCarts)="refreshCarts($event)"></app-add-to-cart>-->
+
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-order-online" role="tabpanel"
+                 aria-labelledby="pills-order-online-tab">
+              <div id="#menu" class="bg-white rounded shadow-sm p-4 mb-4">
+                <div class="address-map float-right ml-5">
+                  <div class="mapouter">
+                    <img width="300" height="170" class="img-fluid" src="http://localhost:8080/image/{{dish.image}}" id="dish-image">
+                  </div>
+                </div>
+                <h5 class="mb-4">{{dish.name}}</h5>
+                <p class="mb-2 text-gray-dark font-weight-bold">{{dish.price | number}}đ / suất</p>
+                <p class="mb-3">
+                  <span class="badge badge-primary mr-1"
+                        *ngFor="let category of dish.categories">{{category.name}}</span>
+                </p>
+                <p class="text-black mb-2 food-description"> {{dish.description}} </p>
+                <a routerLink="/home/merchant/{{dish.merchant.id}}" class="mt-1 link-view-merchant">Xem cửa hàng</a>
+                <div class="mt-4">
+                  <table class="table no-border">
+                    <tr>
+                      <td class="text-center">Số lượng</td>
+                      <td>Thành tiền</td>
+                      <td></td>
+                    </tr>
+                    <td class="text-center">
+                      <div class="handle-counter d-inline-block" id="handleCounter">
+                        <button class="counter-minus btn btn-counter" (click)="decreaseQuantity()">-</button>
+                        <input type="text" class="input-quantity" [(ngModel)]="quantity">
+                        <button class="counter-plus btn btn-counter" (click)="increaseQuantity()">+</button>
+                      </div>
+                    </td>
+                    <td><span class="text-black font-weight-bolder dish-total">{{dishTotal | number}}</span></td>
+                    <td>
+                      <button class="btn btn-primary" (click)="addToCart()">Thêm vào giỏ hàng</button>
+                    </td>
+                    <tr>
+                    </tr>
+                  </table>
+                </div>
+                <hr class="clearfix">
+                <h5 class="mt-4 mb-4">Coupons</h5>
+                <p class="mb-3">Danh sách mã giảm giá của cửa hàng</p>
+                <div class="border-btn-main mb-4">
+                  <a class="border-btn mr-2 text-success coupon-link rounded" *ngFor="let coupon of coupons"><i
+                    class="icofont-check-circled"></i>{{coupon.name}}</a>
+
+                </div>
+              </div>
+
+<!--              <app-add-to-cart [id]="id" (refreshCarts)="refreshCarts($event)"></app-add-to-cart>-->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-4">
+        <app-merchant-vsattp [merchant]="merchant"></app-merchant-vsattp>
+        <app-carts-table [refreshNum]="countChanges"></app-carts-table>
+      </div>
+    </div>
+    <div class="row">
+      <app-people-also-like [id]="id"></app-people-also-like>
+<!--      <app-exclusively-for-you [id]="id"></app-exclusively-for-you>-->
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

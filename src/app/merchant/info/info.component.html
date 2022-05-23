@@ -1,0 +1,61 @@
+<app-navbar-customer></app-navbar-customer>
+<app-my-merchant-banner [merchant]="merchant"></app-my-merchant-banner>
+<app-second-navbar></app-second-navbar>
+
+<div class="hold-transition sidebar-mini">
+  <div class="wrapper">
+
+    <div class="content-wrapper">
+
+      <!--      Bat dau o day -->
+      <div class="container mt-3">
+        <form [formGroup]="merchantForm" (ngSubmit)="editMerchant()" role="form">
+          <div class="mb-3">
+            <label for="name" class="form-label">Tên cửa hàng</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+            <div class="validate" [hidden]="nameControl.valid || !nameControl.touched">
+              <div *ngIf="nameControl.errors?.required">Nhập tên cửa hàng</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Mô tả cửa hàng</label>
+            <input type="text" class="form-control" id="description" formControlName="description">
+            <div class="validate" [hidden]="descriptionControl.valid || !descriptionControl.touched">
+              <div *ngIf="descriptionControl.errors?.required">Nhập tên mô tả</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Địa chỉ</label>
+            <input type="text" class="form-control" id="address" formControlName="address">
+            <div class="validate" [hidden]="addressControl.valid || !addressControl.touched">
+              <div *ngIf="addressControl.errors?.required">Nhập địa chỉ cửa hàng</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Số điện thoại</label>
+            <input type="text" class="form-control" id="phone" formControlName="phone">
+            <div class="validate" [hidden]="phoneControl.valid || !phoneControl.touched">
+              <div *ngIf="phoneControl.errors?.required">Nhập số điện thoại</div>
+              <div *ngIf="phoneControl.errors?.pattern">Sai định dạng số điện thoại</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="openTime" class="form-label">Giờ mở cửa</label>
+            <input type="time" class="form-control" id="openTime" formControlName="openTime">
+          </div>
+          <div class="mb-3">
+            <label for="closeTime" class="form-label">Giờ đóng cửa</label>
+            <input type="time" class="form-control" id="closeTime" formControlName="closeTime">
+          </div>
+          <button type="submit" class="btn btn-info">Cập nhật thông tin</button>
+        </form>
+
+      </div>
+      <!--      Ket thuc o day-->
+
+    </div>
+  </div>
+</div>
+
+<hr>
+<app-footer></app-footer>

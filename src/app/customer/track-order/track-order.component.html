@@ -1,0 +1,90 @@
+<app-navbar-customer></app-navbar-customer>
+
+<section class="section bg-white osahan-track-order-page position-relative">
+  <iframe class="position-absolute"
+          src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d13696.650704896498!2d75.82434255!3d30.8821099!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1555184720550!5m2!1sen!2sin"
+          width="100%" height="676" frameborder="0" style="border:0" allowfullscreen></iframe>
+  <div class="container pt-5 pb-5">
+    <div class="row d-flex align-items-center">
+      <div class="col-md-6 text-center pb-4">
+        <div class="osahan-point mx-auto"></div>
+      </div>
+      <div class="col-md-6">
+        <div class="bg-white p-4 shadow-lg mb-2">
+          <div class="mb-2"><small>Mã đơn hàng #{{orderDto.id}} | Trạng thái: {{orderStatus}}<a class="float-right font-weight-bold" href="#"><i
+            class="icofont-headphone-alt"></i> Trợ giúp</a></small></div>
+          <h6 class="mb-1 mt-1"><a href="detail.html" class="text-black">{{orderDto.merchant.name}}
+          </a>
+          </h6>
+          <p class="text-gray mb-0"><i class="icofont-clock-time"></i>
+            {{orderDto.createDate | date: 'dd/MM/yyyy hh:mm'}} | {{orderDto.cart.cartDetails.length}} sản phẩm |
+            {{orderDto.cart.totalFee | number}}đ
+          </p>
+        </div>
+        <div class="bg-white p-4 shadow-lg">
+          <div class="osahan-track-order-detail po">
+            <h5 class="mt-0 mb-3">Chi tiết đơn hàng</h5>
+            <div class="row">
+              <div class="col-md-5">
+                <small>Cửa hàng</small>
+                <h6 class="mb-1 mt-1"><a href="detail.html" class="text-black"><i
+                  class="icofont-food-cart"></i> {{orderDto.merchant.name}}
+                </a>
+                </h6>
+                <p class="text-gray mb-5">{{orderDto.merchant.address}}</p>
+                <small>Giao tới</small>
+                <h6 class="mb-1 mt-1"><span class="text-black"><i class="icofont-map-pins"></i>
+                                            {{orderDto.deliveryInfo.name}}
+                                        </span>
+                </h6>
+                <p class="text-gray mb-0">{{orderDto.deliveryInfo.address}}
+                </p>
+              </div>
+              <div class="col-md-7">
+                <div class="mb-2"><small><i class="icofont-list"></i> {{orderDto.cart.cartDetails.length}} sản phẩm</small></div>
+                <p class="mb-2" *ngFor="let cartDetail of orderDto.cart.cartDetails">
+                  <i class="icofont-ui-press text-danger food-item">
+                  </i> {{cartDetail.dish.name}} x {{cartDetail.quantity}} <span class="float-right text-secondary">{{cartDetail.dish.price * cartDetail.quantity}}</span>
+                </p>
+                <hr>
+                <p class="mb-2 text-black">Tổng tiền hàng <span
+                  class="float-right text-secondary">{{orderDto.cart.foodTotal}}</span></p>
+                <p class="mb-2 text-black">Tổng giảm giá <span
+                  class="float-right text-secondary">{{orderDto.cart.discountAmount}}</span></p>
+                <p class="mb-2 text-black">Phí dịch vụ <span
+                  class="float-right text-secondary">{{orderDto.cart.serviceFee}}</span></p>
+                <p class="mb-2 text-black">Phí giao hàng <span
+                  class="float-right text-secondary">{{orderDto.cart.shippingFee}}</span></p>
+                <p class="mb-0 font-weight-bold text-black">Tổng thanh toán <span
+                  class="float-right text-secondary">{{orderDto.cart.totalFee}}</span></p>
+                <!-- <p class="mb-0 text-info"><small>Paid via Credit/Debit card
+                        <span class="float-right text-danger">$620 OFF</span></small>
+                </p> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white p-4 shadow-lg mt-2">
+          <div class="row text-center">
+            <div class="col">
+              <i class="icofont-tasks icofont-3x text-info"></i>
+              <p class="mt-1 font-weight-bold text-dark mb-0">Đã tiếp nhận đơn hàng</p>
+              <small class="text-info mb-0">NOW</small>
+            </div>
+            <div class="col">
+              <i class="icofont-check-circled icofont-3x text-success"></i>
+              <p class="mt-1 font-weight-bold text-dark mb-0">Đang lấy hàng</p>
+              <small class="text-success mb-0">NEXT</small>
+            </div>
+            <div class="col">
+              <i class="icofont-delivery-time icofont-3x text-primary"></i>
+              <p class="mt-1 font-weight-bold text-dark mb-0">Đang giao hàng</p>
+              <small class="text-primary mb-0">LATER (ET : 30min)</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

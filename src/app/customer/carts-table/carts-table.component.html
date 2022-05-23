@@ -1,0 +1,44 @@
+<div class="generator-bg rounded shadow-sm mb-4 p-4 osahan-cart-item">
+  <div class="mb-2 d-flex justify-content-center">
+    <h4 class=" text-white"> {{carts.length > 0 ? 'Giỏ hàng của bạn' : 'Giỏ hàng trống' }}
+    </h4>
+  </div>
+  <div class="py-2 border-top" *ngFor="let cart of carts">
+    <div class="d-flex mb-4 osahan-cart-item-profile">
+      <img class="img-fluid mr-3 rounded-pill" alt="osahan" src="assets/customer-template/img/2.jpg">
+      <div class="d-flex flex-column">
+        <h6 class="mb-1 text-white"> {{cart.merchant.name}}
+        </h6>
+        <p class="mb-0 text-white"><i class="icofont-location-pin"></i>{{cart.merchant.address}} </p>
+      </div>
+    </div>
+    <div class="bg-white rounded shadow-sm mb-2">
+      <div class="gold-members p-2 border-bottom" *ngFor="let cartDetail of cart.cartDetails">
+        <p class="text-gray mb-0 float-right ml-2">{{cartDetail.quantity * cartDetail.dish.price | number}}</p>
+        <span class="count-number float-right">
+                                    <button class="btn btn-outline-secondary  btn-sm left dec"
+                                            (click)="decreaseDishQuantity(cart.id, cartDetail.dish.id)">
+                                      <i class="icofont-minus"></i> </button>
+                                    <input class="count-number-input" type="text" value="{{cartDetail.quantity}}"
+                                           readonly="">
+                                    <button class="btn btn-outline-secondary btn-sm right inc"
+                                            (click)="increaseDishQuantity(cart.id, cartDetail.dish.id)">
+                                      <i class="icofont-plus"></i> </button>
+                                </span>
+        <div class="media">
+          <div class="mr-2"><i class="icofont-ui-press text-danger food-item"></i></div>
+          <div class="media-body">
+            <p class="mt-1 mb-0 text-black">{{cartDetail.dish.name}}</p>
+          </div>
+        </div>
+      </div>
+      <p class="mt-2 mb-5">
+        <span class="float-right text-black">
+                      <button class="btn btn-success"
+                              routerLink="/home/checkout/{{cart.merchant.id}}">Thanh toán</button>
+                    </span>
+      </p>
+    </div>
+  </div>
+</div>
+

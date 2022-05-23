@@ -1,0 +1,8 @@
+<div id="#" class="bg-white rounded shadow-sm p-4 mb-4 explore-outlets">
+  <h4 class="mb-4 text-center">Món dành riêng cho bạn</h4>
+  <div class="row">
+    <div class="col-md-3 col-sm-6 mb-4 pb-2" *ngFor="let dish of dishesForYou">
+      <app-food-card [dish]="dish"></app-food-card>
+    </div>
+  </div>
+</div>

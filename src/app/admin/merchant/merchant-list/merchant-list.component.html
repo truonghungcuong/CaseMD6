@@ -1,0 +1,64 @@
+<app-sidebar-admin></app-sidebar-admin>
+<app-navbar-admin></app-navbar-admin>
+<div class="content-wrapper">
+  <router-outlet></router-outlet>
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Danh sách cửa hàng</h1>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+              <table id="merchant-list" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Tên cửa hàng</th>
+                  <th>Địa chỉ</th>
+                  <th>Số điện thoại</th>
+                  <th>Giờ mở cửa</th>
+                  <th>Giờ đóng cửa</th>
+                  <th>Giấy chứng nhận VSATTP</th>
+                  <th>Trạng thái</th>
+                  <th>Chức năng</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let merchant of merchants; index as i" >
+                  <td>{{i + 1}}</td>
+                  <td><a routerLink="/admin/merchant/view/{{merchant.id}}">{{merchant.name}}</a></td>
+                  <td>{{merchant.address}}</td>
+                  <td>{{merchant.phone}}</td>
+                  <td>{{merchant.openTime}}</td>
+                  <td>{{merchant.closeTime}}</td>
+                  <td>{{(merchant.vsattp && merchant.vsattp.length > 0)? "Có chứng nhận"  : '-'}}</td>
+                  <td>{{merchant.active? 'Đang hoạt đông' : 'Đã khóa'}}</td>
+                  <td>
+                    <button *ngIf="merchant.active" class="btn btn-danger" (click)="toggleMerchant(merchant)">Khóa</button>
+                    <button *ngIf="!merchant.active" class="btn btn-success" (click)="toggleMerchant(merchant)">Mở</button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>

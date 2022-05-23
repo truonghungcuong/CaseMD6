@@ -1,0 +1,61 @@
+.full-width{
+ width: 100%;
+}
+
+.handle-counter {overflow:hidden; }
+
+.handle-counter .counter-minus,  .handle-counter .counter-plus,  .handle-counter input {
+  float:left;
+  text-align:center;
+}
+.handle-counter .counter-minus,  .handle-counter .counter-plus {text-align:center; }
+.handle-counter input {
+  width:56px;
+  border-width:1px;
+  border-left:none;
+  border-right:none;
+}
+.btn-counter{
+  padding: 0;
+  border: 1px solid transparent;
+  color: #fff;
+  height: 36px;
+  width: 36px;
+  font-size: 150%;
+  text-align: center;
+  text-justify: auto;
+}
+
+.btn:disabled, .btn:disabled:hover {
+  background-color: darkgrey;
+  cursor: not-allowed;
+}
+
+.btn-counter {background-color:#3ECF8E; }
+.btn-counter:hover, .btn-counter:focus {background-color:#3ECF8E;}
+
+.input-quantity{
+  height: 36px;
+  margin-inline: 3px;
+}
+
+
+.dish-total{
+  font-size: 115%;
+}
+
+.food-description {
+  font-size: 110%;
+}
+
+.link-view-merchant {
+  text-decoration: underline;
+  font-size: 120%;
+  font-style: italic;
+}
+
+
+.coupon-link:hover {
+  cursor: pointer;
+  background: #3ECF8E;
+}

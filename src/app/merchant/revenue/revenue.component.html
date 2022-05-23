@@ -1,0 +1,62 @@
+<app-navbar-customer></app-navbar-customer>
+<app-my-merchant-banner [merchant]="merchant"></app-my-merchant-banner>
+<app-second-navbar></app-second-navbar>
+
+<section class="content">
+  <div class="mt-3 container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Quản lý Doanh thu</h3>
+            <div>
+              <button (click)="getAllOrders()" class="col-1 float-right btn btn-info ml-2">Tìm kiếm</button>
+              <input (change)="getAllOrders()" type="date" id="endDate" [(ngModel)]="endDate" class="form-control col-2 float-right ml-1">
+              <input (change)="getAllOrders()" type="date" id="startDate" [(ngModel)]="startDate" class="form-control col-2 float-right">
+
+            </div>
+<!--            <button class="btn btn-info float-right">-->
+<!--              <a class="text-light" routerLink="/merchant/orders">Danh sách đơn hàng</a>-->
+<!--            </button>-->
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="example2" class="table table-bordered table-hover">
+              <thead>
+              <tr>
+                <th>STT</th>
+                <th>Mã Đơn hàng</th>
+                <th>Khách hàng</th>
+                <th>Thời gian đặt hàng</th>
+                <th>Doanh thu</th>
+              </tr>
+
+              <tr>
+                <th colspan="4">Tổng doanh thu</th>
+                <th>{{totalRevenue | number}}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let order of orders; index as i">
+                <td>{{i + 1}}</td>
+                <td><a routerLink="/merchant/orders/view/{{order.id}}">#{{order.id}}</a></td>
+                <td>{{order.full_Name}}</td>
+                <td>{{order.create_Date}}</td>
+                <td>{{order.total_Fee-order.service_Fee - order.shipping_Fee | number}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<hr>
+<app-footer></app-footer>
